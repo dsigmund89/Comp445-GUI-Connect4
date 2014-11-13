@@ -25,6 +25,11 @@ namespace HardingApp
         public MainPage()
         {
             this.InitializeComponent();
+            BrowserSession b = new BrowserSession();
+            b.Get("http://pipeline.harding.edu");
+            b.FormElements["username"] = "asanchez";
+            b.FormElements["password"] = "hola2015";
+            string response = b.Post("http://pipeline.harding.edu");
         }
     }
 }
