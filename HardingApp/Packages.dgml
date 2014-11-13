@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+<<<<<<< HEAD
   <Nodes>
     <Node Id="HardingApp" Label="HardingApp" Category="Project" />
     <Node Id="HtmlAgilityPack 1.4.9" Label="HtmlAgilityPack 1.4.9" Category="Package" />
@@ -7,6 +8,10 @@
   <Links>
     <Link Source="HardingApp" Target="HtmlAgilityPack 1.4.9" Category="Installed Package" />
   </Links>
+=======
+  <Nodes />
+  <Links />
+>>>>>>> 34684053be163bedb6dda3818768f162202fd825
   <Categories>
     <Category Id="Project" />
     <Category Id="Package" />
