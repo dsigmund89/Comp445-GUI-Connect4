@@ -1,6 +1,8 @@
 ﻿using HardingApp.Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -23,6 +26,13 @@ namespace HardingApp
    /// </summary>
    public sealed partial class MyLoginPage : Page
    {
+       private string urlString = "https://login.harding.edu/login?service=https%3A%2F%2Fpipeline.harding.edu%2F";
+       private string ltValue;
+       private string executionValue;
+
+       private string loginParams;
+       private string logInUserIdString = "dsigmund";
+       private string logInPasswordString = "TROMbone89*%5E";
 
       private NavigationHelper navigationHelper;
       private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -51,6 +61,75 @@ namespace HardingApp
          this.navigationHelper = new NavigationHelper(this);
          this.navigationHelper.LoadState += navigationHelper_LoadState;
          this.navigationHelper.SaveState += navigationHelper_SaveState;
+
+         GetHiddenValues();
+      }
+
+      public async void GetHiddenValues()
+      {
+          HtmlDocument doc = new HtmlDocument();
+          using (var client = new HttpClient())
+          {
+              var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
+              doc.LoadHtml(result);
+              //var test = doc.DocumentNode.Descendants()
+              // .Where(n => n.Name == "input");
+
+              var value = from input in doc.DocumentNode.Descendants("input")
+                          select input.OuterHtml;
+
+              string temp;
+              foreach (string data in value)
+              {
+                  if (data.Contains("name=\"lt\""))
+                  {
+                      temp = data;
+                      int startPos = temp.LastIndexOf("value=\"") + "value=\"".Length;
+                      int length = temp.IndexOf("\">") - startPos;
+                      ltValue = temp.Substring(startPos, length);
+                  }
+                  else if (data.Contains("name=\"execution\""))
+                  {
+                      temp = data;
+                      int startPos = temp.LastIndexOf("value=\"") + "value=\"".Length;
+                      int length = temp.IndexOf("\">") - startPos;
+                      executionValue = temp.Substring(startPos, length);
+                  }
+                  temp = "";
+              }
+
+              Debug.WriteLine("ltValue = " + ltValue);
+              Debug.WriteLine("executionValue = " + executionValue);
+
+              VerifyUser();
+          }
+      }
+
+      private async void VerifyUser()
+      {
+
+
+          loginParams = "&username=" + logInUserIdString + "&password=" + logInPasswordString
+                          + "&lt=" + ltValue + "&execution=" + executionValue + "&_eventId=submit&submit=Log+in";
+          string teamResponse = urlString + loginParams;
+          Debug.WriteLine(teamResponse);
+
+          HttpClient client = new HttpClient();
+
+          try
+          {
+              HttpResponseMessage response = await client.PostAsync(new Uri(teamResponse), null);
+
+              response.EnsureSuccessStatusCode();
+              string responseBody = await response.Content.ReadAsStringAsync();
+
+              Debug.WriteLine(responseBody);
+          }
+          catch (System.Net.Http.HttpRequestException e)
+          {
+              Debug.WriteLine("\nException Caught!");
+              Debug.WriteLine("Message :{0} ", e.Message);
+          }
       }
 
       /// <summary>
