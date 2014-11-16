@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HardingApp.Common;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,10 +24,57 @@ namespace HardingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
+
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
+
+        void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+            Debug.WriteLine("MainPage - LoadState");
+
+            // Load app data
+            Windows.Storage.ApplicationDataContainer roamingSetttings =
+                Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSetttings.Values.ContainsKey("welcometext"))
+                welcomeTextBlock.Text = roamingSetttings.Values["welcometext"].ToString();
+        }
+
+        #region Navigation Helper registration
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
 
         private void chapelButton_Tapped(object sender, TappedRoutedEventArgs e)
         {

@@ -307,6 +307,8 @@ namespace HardingApp.HardingApp_XamlTypeInfo
             case 12:   //  HardingApp.MainPage
                 userType = new global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_12_MainPage;
+                userType.AddMemberName("DefaultViewModel");
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -401,42 +403,52 @@ namespace HardingApp.HardingApp_XamlTypeInfo
             var that = (global::HardingApp.HardingCafeteriaInfoPage)instance;
             return that.NavigationHelper;
         }
-        private object get_10_MapPage_DefaultViewModel(object instance)
+        private object get_10_MainPage_DefaultViewModel(object instance)
+        {
+            var that = (global::HardingApp.MainPage)instance;
+            return that.DefaultViewModel;
+        }
+        private object get_11_MainPage_NavigationHelper(object instance)
+        {
+            var that = (global::HardingApp.MainPage)instance;
+            return that.NavigationHelper;
+        }
+        private object get_12_MapPage_DefaultViewModel(object instance)
         {
             var that = (global::HardingApp.MapPage)instance;
             return that.DefaultViewModel;
         }
-        private object get_11_MapPage_NavigationHelper(object instance)
+        private object get_13_MapPage_NavigationHelper(object instance)
         {
             var that = (global::HardingApp.MapPage)instance;
             return that.NavigationHelper;
         }
-        private object get_12_MyLoginPage_DefaultViewModel(object instance)
+        private object get_14_MyLoginPage_DefaultViewModel(object instance)
         {
             var that = (global::HardingApp.MyLoginPage)instance;
             return that.DefaultViewModel;
         }
-        private object get_13_MyLoginPage_NavigationHelper(object instance)
+        private object get_15_MyLoginPage_NavigationHelper(object instance)
         {
             var that = (global::HardingApp.MyLoginPage)instance;
             return that.NavigationHelper;
         }
-        private object get_14_SchedulePage_DefaultViewModel(object instance)
+        private object get_16_SchedulePage_DefaultViewModel(object instance)
         {
             var that = (global::HardingApp.SchedulePage)instance;
             return that.DefaultViewModel;
         }
-        private object get_15_SchedulePage_NavigationHelper(object instance)
+        private object get_17_SchedulePage_NavigationHelper(object instance)
         {
             var that = (global::HardingApp.SchedulePage)instance;
             return that.NavigationHelper;
         }
-        private object get_16_WhiteboardPage_DefaultViewModel(object instance)
+        private object get_18_WhiteboardPage_DefaultViewModel(object instance)
         {
             var that = (global::HardingApp.WhiteboardPage)instance;
             return that.DefaultViewModel;
         }
-        private object get_17_WhiteboardPage_NavigationHelper(object instance)
+        private object get_19_WhiteboardPage_NavigationHelper(object instance)
         {
             var that = (global::HardingApp.WhiteboardPage)instance;
             return that.NavigationHelper;
@@ -509,52 +521,64 @@ namespace HardingApp.HardingApp_XamlTypeInfo
                 xamlMember.Getter = get_9_HardingCafeteriaInfoPage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
+            case "HardingApp.MainPage.DefaultViewModel":
+                userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.MainPage");
+                xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "HardingApp.Common.ObservableDictionary");
+                xamlMember.Getter = get_10_MainPage_DefaultViewModel;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "HardingApp.MainPage.NavigationHelper":
+                userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.MainPage");
+                xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "NavigationHelper", "HardingApp.Common.NavigationHelper");
+                xamlMember.Getter = get_11_MainPage_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
             case "HardingApp.MapPage.DefaultViewModel":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.MapPage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "HardingApp.Common.ObservableDictionary");
-                xamlMember.Getter = get_10_MapPage_DefaultViewModel;
+                xamlMember.Getter = get_12_MapPage_DefaultViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.MapPage.NavigationHelper":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.MapPage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "NavigationHelper", "HardingApp.Common.NavigationHelper");
-                xamlMember.Getter = get_11_MapPage_NavigationHelper;
+                xamlMember.Getter = get_13_MapPage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.MyLoginPage.DefaultViewModel":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.MyLoginPage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "HardingApp.Common.ObservableDictionary");
-                xamlMember.Getter = get_12_MyLoginPage_DefaultViewModel;
+                xamlMember.Getter = get_14_MyLoginPage_DefaultViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.MyLoginPage.NavigationHelper":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.MyLoginPage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "NavigationHelper", "HardingApp.Common.NavigationHelper");
-                xamlMember.Getter = get_13_MyLoginPage_NavigationHelper;
+                xamlMember.Getter = get_15_MyLoginPage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.SchedulePage.DefaultViewModel":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.SchedulePage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "HardingApp.Common.ObservableDictionary");
-                xamlMember.Getter = get_14_SchedulePage_DefaultViewModel;
+                xamlMember.Getter = get_16_SchedulePage_DefaultViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.SchedulePage.NavigationHelper":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.SchedulePage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "NavigationHelper", "HardingApp.Common.NavigationHelper");
-                xamlMember.Getter = get_15_SchedulePage_NavigationHelper;
+                xamlMember.Getter = get_17_SchedulePage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.WhiteboardPage.DefaultViewModel":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.WhiteboardPage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "HardingApp.Common.ObservableDictionary");
-                xamlMember.Getter = get_16_WhiteboardPage_DefaultViewModel;
+                xamlMember.Getter = get_18_WhiteboardPage_DefaultViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "HardingApp.WhiteboardPage.NavigationHelper":
                 userType = (global::HardingApp.HardingApp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("HardingApp.WhiteboardPage");
                 xamlMember = new global::HardingApp.HardingApp_XamlTypeInfo.XamlMember(this, "NavigationHelper", "HardingApp.Common.NavigationHelper");
-                xamlMember.Getter = get_17_WhiteboardPage_NavigationHelper;
+                xamlMember.Getter = get_19_WhiteboardPage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             }

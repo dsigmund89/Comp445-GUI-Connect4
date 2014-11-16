@@ -131,6 +131,11 @@ namespace HardingApp
                   int length = temp.IndexOf("<a href=\"/logout.php\"") - startPos;
                   welcomeText = temp.Substring(startPos, length);
 
+                  // Save (to localMachine) the welcomeText to be used elsewhere
+                  Windows.Storage.ApplicationDataContainer roamingSettings =
+                      Windows.Storage.ApplicationData.Current.RoamingSettings;
+                  roamingSettings.Values["welcometext"] = welcomeText;
+
                   this.Frame.Navigate(typeof(MainPage));
               }
               else

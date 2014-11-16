@@ -42,6 +42,7 @@
         <Button x:Name="currentEventsButton" Content="Current Events" HorizontalAlignment="Left" Margin="317,214,0,0" Grid.Row="1" VerticalAlignment="Top" Height="68" Width="135" Tapped="currentEventsButton_Tapped"/>
         <Button x:Name="classifiedButton" Content="Classified" HorizontalAlignment="Left" Margin="478,214,0,0" Grid.Row="1" VerticalAlignment="Top" Height="68" Width="121" Tapped="classifiedButton_Tapped"/>
         <Button x:Name="cafeteriaButton" Content="Cafeteria" HorizontalAlignment="Left" Margin="645,214,0,0" Grid.Row="1" VerticalAlignment="Top" Height="68" Width="133" Tapped="cafeteriaButton_Tapped"/>
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" Margin="36,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="1320" FontSize="20"/>
 
     </Grid>
 </Page>
