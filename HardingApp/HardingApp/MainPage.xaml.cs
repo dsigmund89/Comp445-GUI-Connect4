@@ -26,5 +26,45 @@ namespace HardingApp
         {
             this.InitializeComponent();
         }
+
+        private void chapelButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ChapelPage));
+        }
+
+        private void mapButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MapPage));
+        }
+
+        private void emergenciesButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EmergenciesPage));
+        }
+
+        private void classesButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ClassesPage));
+        }
+
+        private void gradesButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(GradesPage));
+        }
+
+        private void currentEventsButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SchedulePage));
+        }
+
+        private void classifiedButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(WhiteboardPage));
+        }
+
+        private void cafeteriaButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HardingCafeteriaInfoPage));
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace HardingApp
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class LoginPage : Page
+    public sealed partial class ClassesPage : Page
     {
 
         private NavigationHelper navigationHelper;
@@ -45,7 +45,7 @@ namespace HardingApp
         }
 
 
-        public LoginPage()
+        public ClassesPage()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
