@@ -48,7 +48,7 @@ namespace HardingApp
 
         void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("MainPage - SaveState");
         }
 
         void navigationHelper_LoadState(object sender, LoadStateEventArgs e)

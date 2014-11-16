@@ -46,5 +46,7 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <TextBlock x:Name="emergenciesTextblock" HorizontalAlignment="Left" Margin="60,66,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Looking for Emergencies..." VerticalAlignment="Top" Height="494" Width="612" FontSize="18" Foreground="#FFE44949"/>
+        <TextBlock HorizontalAlignment="Left" Margin="60,29,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Emergencies" VerticalAlignment="Top" Height="32" Width="263" FontSize="22"/>
     </Grid>
 </Page>

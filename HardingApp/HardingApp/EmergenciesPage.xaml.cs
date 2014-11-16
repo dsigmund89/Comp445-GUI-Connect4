@@ -1,4 +1,5 @@
 ﻿using HardingApp.Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -23,7 +25,7 @@ namespace HardingApp
     /// </summary>
     public sealed partial class EmergenciesPage : Page
     {
-
+        private string urlString = "https://pipeline.harding.edu/";
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -51,6 +53,32 @@ namespace HardingApp
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+
+            CheckForEmergencies();
+        }
+
+        private async void CheckForEmergencies()
+        {
+            HtmlDocument doc2 = new HtmlDocument();
+            using (var client2 = new HttpClient())
+            {
+                
+                var result2 = await client2.GetStringAsync(new Uri(urlString, UriKind.Absolute));
+                doc2.LoadHtml(result2);
+
+                var value = doc2.DocumentNode.Descendants("div")
+                                            .Where(node => node.Attributes["class"] != null)
+                                            .Select(node => node.InnerHtml.First().ToString());
+                if (value != null)
+                {
+                    emergenciesTextblock.Text = value.ToString();
+                }
+                else
+                {
+                    emergenciesTextblock.Text = "No Emergencies Found";
+                }
+                client2.Dispose();
+            }
         }
 
         /// <summary>
