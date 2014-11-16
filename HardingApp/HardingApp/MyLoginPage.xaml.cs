@@ -31,8 +31,10 @@ namespace HardingApp
        private string executionValue;
 
        private string loginParams;
-       private string logInUserIdString = "dsigmund";
-       private string logInPasswordString = "TROMbone89*%5E";
+       private string logInUserIdString;
+       private string logInPasswordString;
+
+       private string welcomeText;
 
       private NavigationHelper navigationHelper;
       private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -100,15 +102,11 @@ namespace HardingApp
 
               Debug.WriteLine("ltValue = " + ltValue);
               Debug.WriteLine("executionValue = " + executionValue);
-
-              VerifyUser();
           }
       }
 
-      private async void VerifyUser()
+      private async void VerifyLogin()
       {
-
-
           loginParams = "&username=" + logInUserIdString + "&password=" + logInPasswordString
                           + "&lt=" + ltValue + "&execution=" + executionValue + "&_eventId=submit&submit=Log+in";
           string teamResponse = urlString + loginParams;
@@ -123,7 +121,25 @@ namespace HardingApp
               response.EnsureSuccessStatusCode();
               string responseBody = await response.Content.ReadAsStringAsync();
 
-              Debug.WriteLine(responseBody);
+              string temp;
+              // Check for the Welcome message to see if login was successful
+              if (responseBody.Contains("<div id=\"welcome\">"))
+              {
+                  LoginInfoTextBlock.Text = "";
+                  temp = responseBody;
+                  int startPos = temp.LastIndexOf("<div id=\"welcome\">") + "<div id=\"welcome\">".Length;
+                  int length = temp.IndexOf("<a href=\"/logout.php\"") - startPos;
+                  welcomeText = temp.Substring(startPos, length);
+
+                  this.Frame.Navigate(typeof(MainPage));
+              }
+              else
+              {
+                  LoginInfoTextBlock.Text = "Invaild Credentials";
+                  Debug.WriteLine("Didn't Login!");
+              }
+
+             // Debug.WriteLine(responseBody);
           }
           catch (System.Net.Http.HttpRequestException e)
           {
@@ -132,6 +148,16 @@ namespace HardingApp
           }
       }
 
+      private void Button_Tapped(object sender, TappedRoutedEventArgs e)
+      {
+          if (UsernameTextBox.Text.Trim() != "" && PasswordBox.Password.Trim() != "")
+          {
+              logInUserIdString = UsernameTextBox.Text;
+              logInPasswordString = PasswordBox.Password;
+
+              VerifyLogin();
+          }
+      }
       /// <summary>
       /// Populates the page with content passed during navigation. Any saved state is also
       /// provided when recreating a page from a prior session.
@@ -181,5 +207,7 @@ namespace HardingApp
       }
 
       #endregion
+
+    
    }
 }

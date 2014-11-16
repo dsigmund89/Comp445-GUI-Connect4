@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Login</x:String>
     </Page.Resources>
 
     <!--
@@ -37,16 +37,13 @@
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
+
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        <TextBox Name="UsernameTextBox" HorizontalAlignment="Left" Margin="231,100,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="355"/>
-        <PasswordBox Name="PasswordBox" HorizontalAlignment="Left" Margin="664,100,0,0" Grid.Row="1" VerticalAlignment="Top" Width="358"/>
+        <TextBox Name="UsernameTextBox" HorizontalAlignment="Left" Margin="517,111,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="355" PlaceholderText="Username"/>
+        <PasswordBox Name="PasswordBox" HorizontalAlignment="Left" Margin="517,181,0,0" Grid.Row="1" VerticalAlignment="Top" Width="355" PlaceholderText="Password"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="579,272,0,0" Grid.Row="1" VerticalAlignment="Top" Height="81" Width="209" FontSize="24" Tapped="Button_Tapped"/>
+        <TextBlock Name="LoginInfoTextBlock" HorizontalAlignment="Left" Margin="517,60,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="51" Width="233" FontSize="20" Foreground="#FFEA4747"/>
     </Grid>
 </Page>
