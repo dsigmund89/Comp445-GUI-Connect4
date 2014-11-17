@@ -104,9 +104,6 @@ namespace HardingApp
               Debug.WriteLine("executionValue = " + executionValue);
               
           }
-          
-          
-          
       }
 
       private async void VerifyLogin()
@@ -149,7 +146,6 @@ namespace HardingApp
               }
 
              // Debug.WriteLine(responseBody);
-              client.Dispose();
           }
           catch (System.Net.Http.HttpRequestException e)
           {

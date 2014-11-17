@@ -77,7 +77,6 @@ namespace HardingApp
                 {
                     emergenciesTextblock.Text = "No Emergencies Found";
                 }
-                client2.Dispose();
             }
         }
 

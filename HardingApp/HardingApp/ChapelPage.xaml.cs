@@ -1,4 +1,5 @@
 ﻿using HardingApp.Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -23,6 +25,7 @@ namespace HardingApp
     /// </summary>
     public sealed partial class ChapelPage : Page
     {
+        private string urlString = "https://ssbprod1.harding.edu:8443/ssomanager/c/SSB?proc=zwskchpl.P_GetTerm";
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -51,6 +54,18 @@ namespace HardingApp
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+
+            GetChapelInfo();
+        }
+
+        private async void GetChapelInfo()
+        {
+            HtmlDocument doc = new HtmlDocument();
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
+                doc.LoadHtml(result);
+            }
         }
 
         /// <summary>
