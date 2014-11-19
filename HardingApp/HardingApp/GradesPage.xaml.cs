@@ -87,9 +87,8 @@ namespace HardingApp
                         Final = linkNode[3].ToString()
                      };
                   }
-                  ))).ToList().AsEnumerable();
-            //.Select(z => z.InnerText.Trim())));
-
+                  ))).ToList();
+      
             var currentSemesterVar = doc.DocumentNode.Descendants("div")
                .Where(x => x.Attributes.Contains("id")
                            && x.Attributes["id"].Value.Trim().ToString().Equals("studentgrades"))
@@ -100,28 +99,9 @@ namespace HardingApp
             {
                CurrentSemesterTextBlock.Text = item.ToString();
             }
-
-            //List<Grades> myGrades = new List<Grades>();
-            //foreach (var tr in value)
-            //{
-            //   //var values = (from tds in tr.Descendants("td")
-            //                 //select tds.InnerText.Trim()).ToList();
-            //   //var data = new Grades
-            //   //{
-            //   //   Title = value.,
-            //   //   Teacher = ,
-            //   //   Midterm = value[i],
-            //   //   Final = value[i]
-            //   //};
-            //   //myGrades.Add(data);
-            //   Debug.WriteLine(tr.ToString());
-            //}
-
-            // Data = new ObservableCollection<Grades>(value);
+            GradesListView.ItemsSource = value;
          }
       }
-
-
 
       /// <summary>
       /// Populates the page with content passed during navigation. Any saved state is also
@@ -176,53 +156,6 @@ namespace HardingApp
       }
 
       #endregion
-   }
-
-   public class ViewModel
-   {
-      public ObservableCollection<Grades> Data { get; set; }
-      private string urlString = "https://pipeline.harding.edu/student/";
-
-      //static async method that behave like a constructor       
-      public static async Task<ViewModel> BuildViewModelAsync()
-      {
-         using (var client = new HttpClient())
-         {
-            HtmlDocument doc;
-            doc = new HtmlDocument();
-            string urlString = "https://pipeline.harding.edu/student/";
-            var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
-            doc.LoadHtml(result);
-            var value = doc.DocumentNode.Descendants("div")
-               .Where(
-                  x =>
-                     x.Attributes.Contains("id") &&
-                     x.Attributes["id"].Value.Trim().ToString().Equals("studentgrades"))
-               .SelectMany(x => x.Descendants("table").SelectMany(y => y.Descendants("tr").Skip(1)
-                  .Select(r =>
-                  {
-                     var linkNode = r.Descendants("td").Select(b => b.InnerText.Trim()).ToArray();
-                     return new Grades
-                     {
-                        Title = linkNode[0].ToString(),
-                        Teacher = linkNode[1].ToString(),
-                        Midterm = linkNode[2].ToString(),
-                        Final = linkNode[3].ToString()
-                     };
-                  }
-                  ))).ToList().AsEnumerable();
-
-            ObservableCollection<Grades> tmpData = new ObservableCollection<Grades>(value);
-            return new ViewModel(tmpData);
-         }
-      }
-
-      // private constructor called by the async method
-      private ViewModel(ObservableCollection<Grades> Data)
-      {
-         this.Data = Data;
-      }
-
    }
 
    public class Grades
