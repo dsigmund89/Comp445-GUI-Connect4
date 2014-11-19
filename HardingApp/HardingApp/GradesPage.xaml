@@ -13,10 +13,28 @@
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Grades</x:String>
-        
+        <DataTemplate x:Key="GradesDataTemplate">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="5,0" />
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Grid.Column="0" Text="{Binding Title}" />
+                <TextBlock Grid.Column="1" Text="{Binding Teacher}" />
+                <TextBlock Grid.Column="2" Text="{Binding Midterm}" />
+                <TextBlock Grid.Column="3" Text="{Binding Final}" />
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
-    
+
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
@@ -52,65 +70,50 @@
                    Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="43" 
                    Width="166" RenderTransformOrigin="0.494,0.01"
                    Style="{StaticResource TitleTextBlockStyle}"/>
-        <StackPanel Margin="-377,103,377,385" Grid.Row="1">
-        <Grid Width="400">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="BorderBrush" Value="Black" />
-                    <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Padding" Value="5" />
-                </Style>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Foreground" Value="Black" />
-                </Style>
-            </Grid.Resources>
-            <Border Grid.Column="0" Grid.Row="0">
-                <TextBlock Text="Title" />
-            </Border>
-            <Border Grid.Column="1" Grid.Row="0">
-                <TextBlock Text="Professor" />
-            </Border>
-            <Border Grid.Column="2" Grid.Row="0">
-                <TextBlock Text="Midterm" />
-            </Border>
-                <Border Grid.Column="3" Grid.Row="0">
-                    <TextBlock Text="Final" />
-                </Border>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Width="Auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="5" />
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                </Grid.Resources>
+                <StackPanel Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Grid.Row="0">
+                            <TextBlock Text="Title" />
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="0">
+                            <TextBlock Text="Professor" />
+                        </Border>
+                        <Border Grid.Column="2" Grid.Row="0">
+                            <TextBlock Text="Midterm" />
+                        </Border>
+                        <Border Grid.Column="3" Grid.Row="0">
+                            <TextBlock Text="Final" />
+                        </Border>
+                    </Grid>
+                </StackPanel>
+                <ListView x:Name="GradesListView" Grid.Row="1"
+                       Grid.Column="0" ItemTemplate="{StaticResource GradesDataTemplate}">
+                </ListView>
             </Grid>
-            <ItemsControl ItemsSource="{Binding Data}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Width="400">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Margin" Value="5,0" />
-                                </Style>
-                            </Grid.Resources>
-                            <TextBlock Grid.Column="0" Text="{Binding Title}" />
-                            <TextBlock Grid.Column="1" Text="{Binding Teacher}" />
-                            <TextBlock Grid.Column="2" Text="{Binding Midterm}" />
-                            <TextBlock Grid.Column="3" Text="{Binding Final}" />
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
         </StackPanel>
     </Grid>
 </Page>
