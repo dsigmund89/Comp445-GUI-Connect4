@@ -27,8 +27,6 @@ namespace HardingApp
     public sealed partial class ClassesPage : Page
     {
         private string urlString = "https://ssbprod1.harding.edu:8443/ssomanager/c/SSB?proc=bwskfshd.P_CrseSchd";
-        private string ltValue;
-        private string executionValue;
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -57,26 +55,9 @@ namespace HardingApp
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-
-            GetClassSchedule();
+            ClassesWebView.Navigate(new Uri(urlString));
         }
 
-       
-
-        private async void GetClassSchedule()
-        {
-            HtmlDocument doc = new HtmlDocument();
-            using (var client = new HttpClient())
-            {
-                var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
-                doc.LoadHtml(result);
-
-                var value = doc.DocumentNode.Descendants("table")
-                                            .Where(node => node.Attributes["class"] != null && node.Attributes["class"].Value == "datadisplaytable")
-                                            .Select(node => node.InnerHtml).ToList();
-                testBlock.Text = value[0].ToString();
-            }
-        }
 
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also

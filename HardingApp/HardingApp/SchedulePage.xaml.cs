@@ -26,7 +26,7 @@ namespace HardingApp
 
       private NavigationHelper navigationHelper;
       private ObservableDictionary defaultViewModel = new ObservableDictionary();
-      private string htmlString = "<!DOCTYPE html><html><body><iframe frameborder=\"0\" height=\"588\" src=\"http://www.google.com/calendar/embed?src=harding.edu_evioo539doe0lmqi996gs62av4%40group.calendar.google.com&amp;title=Campus Calendar&amp;chrome=NAVIGATION&amp;epr=4&amp;height=588\" style=\"border-width: 0pt;\" width=\"100%\">iframe unsupported</iframe></body></html>";
+      private string htmlString = "http://www.google.com/calendar/embed?src=harding.edu_evioo539doe0lmqi996gs62av4%40group.calendar.google.com&amp;title=Campus Calendar&amp;chrome=NAVIGATION&amp;epr=4&amp;height=588";
       /// <summary>
       /// This can be changed to a strongly typed view model.
       /// </summary>
@@ -51,7 +51,7 @@ namespace HardingApp
          this.navigationHelper = new NavigationHelper(this);
          this.navigationHelper.LoadState += navigationHelper_LoadState;
          this.navigationHelper.SaveState += navigationHelper_SaveState;
-         HardingCalendarWebView.NavigateToString(htmlString);
+         HardingCalendarWebView.Navigate(new Uri(htmlString));
       }
 
       /// <summary>
