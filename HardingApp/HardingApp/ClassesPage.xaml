@@ -47,7 +47,7 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
         <Border BorderThickness="1" BorderBrush="#FF707070" Grid.Row="1">
-            <WebView x:Name="ClassesWebView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <WebView x:Name="ClassesWebView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationCompleted="ClassesWebView_NavigationCompleted"/>
         </Border>
         <!--<TextBlock x:Name="testBlock" HorizontalAlignment="Left" Margin="204,56,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="377" Width="854" FontSize="18"/>-->
     </Grid>

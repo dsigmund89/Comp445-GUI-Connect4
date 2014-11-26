@@ -58,7 +58,11 @@ namespace HardingApp
             ClassesWebView.Navigate(new Uri(urlString));
         }
 
-
+        private void ClassesWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            ClassesWebView.InvokeScript("eval", new string[] {"document.getElementsByClassName('headerwrapperdiv')[0].style.display = 'none';" +
+								"document.getElementsByClassName('footerlinksdiv')[0].style.display = 'none';"});
+        }
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -108,5 +112,6 @@ namespace HardingApp
         }
 
         #endregion
+
     }
 }

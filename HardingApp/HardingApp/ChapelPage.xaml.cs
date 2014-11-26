@@ -56,12 +56,16 @@ namespace HardingApp
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
             ChapelWebView.Navigate(new Uri(urlString));
-            //ChapelWebView.InvokeScript("eval", new string[] { "document.getElementsByClassName('headerwrapperdiv')[0].style.display = 'none';" +
-								//"document.getElementsByTagName('center')[0].style.display = 'none';" });
 
             //GetChapelInfo();
         }
 
+        private void ChapelWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            ChapelWebView.InvokeScript("eval", new string[] {"document.getElementsByClassName('headerwrapperdiv')[0].style.display = 'none';" +
+								"document.getElementsByTagName('center')[0].style.display = 'none';"});
+        }
+        
         private async void GetChapelInfo()
         {
             HtmlDocument doc = new HtmlDocument();
@@ -121,5 +125,6 @@ namespace HardingApp
         }
 
         #endregion
+
     }
 }
