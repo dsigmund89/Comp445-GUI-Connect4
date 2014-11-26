@@ -25,7 +25,8 @@ namespace HardingApp
     /// </summary>
     public sealed partial class ChapelPage : Page
     {
-        private string urlString = "https://ssbprod1.harding.edu:8443/ssomanager/c/SSB?proc=zwskchpl.P_GetTerm";
+        // Term_in is equal to the year you want and the spring(10) or fall(90) semester. So fall of 2014 is 201490.
+        private string urlString = "https://ssbprod1.harding.edu:8443/ssomanager/c/SSB?proc=zwskchpl.P_GetChapel_Info?term_in=201490";
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -54,8 +55,11 @@ namespace HardingApp
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            ChapelWebView.Navigate(new Uri(urlString));
+            //ChapelWebView.InvokeScript("eval", new string[] { "document.getElementsByClassName('headerwrapperdiv')[0].style.display = 'none';" +
+								//"document.getElementsByTagName('center')[0].style.display = 'none';" });
 
-            GetChapelInfo();
+            //GetChapelInfo();
         }
 
         private async void GetChapelInfo()
