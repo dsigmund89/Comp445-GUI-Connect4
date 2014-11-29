@@ -1,5 +1,4 @@
 ﻿using HardingApp.Common;
-using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +13,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.Web.Http;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -23,10 +21,8 @@ namespace HardingApp
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class ChapelPage : Page
+    public sealed partial class AboutPage : Page
     {
-        // Term_in is equal to the year you want and the spring(10) or fall(90) semester. So fall of 2014 is 201490.
-        private string urlString = "https://ssbprod1.harding.edu:8443/ssomanager/c/SSB?proc=zwskchpl.P_GetChapel_Info?term_in=201490";
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -49,31 +45,12 @@ namespace HardingApp
         }
 
 
-        public ChapelPage()
+        public AboutPage()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-            ChapelWebView.Navigate(new Uri(urlString));
-
-            //GetChapelInfo();
-        }
-
-        private void ChapelWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            ChapelWebView.InvokeScript("eval", new string[] {"document.getElementsByClassName('headerwrapperdiv')[0].style.display = 'none';" +
-								"document.getElementsByTagName('center')[0].style.display = 'none';"});
-        }
-        
-        private async void GetChapelInfo()
-        {
-            HtmlDocument doc = new HtmlDocument();
-            using (var client = new HttpClient())
-            {
-                var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
-                doc.LoadHtml(result);
-            }
         }
 
         /// <summary>
@@ -126,10 +103,9 @@ namespace HardingApp
 
         #endregion
 
-        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AboutPage));
-        }
 
+        }
     }
 }

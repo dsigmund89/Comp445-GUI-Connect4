@@ -208,5 +208,10 @@ namespace HardingApp
                 Infobox.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AboutPage));
+        }
     }
 }

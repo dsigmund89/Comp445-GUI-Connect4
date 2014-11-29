@@ -13,6 +13,12 @@
         <x:String x:Key="AppName">Main Screen</x:String>
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="About" Icon="Help" Tapped="AppBarButton_Tapped" />
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>

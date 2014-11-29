@@ -102,5 +102,10 @@ namespace HardingApp
       }
 
       #endregion
+
+      private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
+      {
+          this.Frame.Navigate(typeof(AboutPage));
+      }
    }
 }
