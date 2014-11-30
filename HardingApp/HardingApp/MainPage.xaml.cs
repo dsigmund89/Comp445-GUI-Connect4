@@ -1,4 +1,5 @@
 ﻿using HardingApp.Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +26,7 @@ namespace HardingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private string urlString = "https://pipeline.harding.edu/logout.php";
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -120,5 +123,17 @@ namespace HardingApp
         {
             this.Frame.Navigate(typeof(AboutPage));
         }
+
+        private async void Logout_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
+                doc.LoadHtml(result);
+            }
+            this.Frame.Navigate(typeof(MyLoginPage));
+        }
+
     }
 }

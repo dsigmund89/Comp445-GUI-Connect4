@@ -102,7 +102,6 @@ namespace HardingApp
 
               Debug.WriteLine("ltValue = " + ltValue);
               Debug.WriteLine("executionValue = " + executionValue);
-              
           }
       }
 
