@@ -57,27 +57,17 @@ namespace HardingApp
             CheckForEmergencies();
         }
 
-        private async void CheckForEmergencies()
+        private void CheckForEmergencies()
         {
-            HtmlDocument doc2 = new HtmlDocument();
-            using (var client2 = new HttpClient())
-            {
-                
-                var result2 = await client2.GetStringAsync(new Uri(urlString, UriKind.Absolute));
-                doc2.LoadHtml(result2);
-
-                var value = doc2.DocumentNode.Descendants("div")
-                                            .Where(node => node.Attributes["class"] != null)
-                                            .Select(node => node.InnerHtml.First().ToString());
-                if (value != null)
-                {
-                    emergenciesTextblock.Text = value.ToString();
-                }
-                else
-                {
-                    emergenciesTextblock.Text = "No Emergencies Found";
-                }
-            }
+             Windows.Storage.ApplicationDataContainer roamingSettings =
+                    Windows.Storage.ApplicationData.Current.RoamingSettings;
+             if (roamingSettings.Values.ContainsKey("emergencytext"))
+             {
+                 if ((roamingSettings.Values["emergencytext"]) != null)
+                 {
+                     emergenciesTextblock.Text = roamingSettings.Values["emergencytext"].ToString();
+                 }
+             }
         }
 
         /// <summary>

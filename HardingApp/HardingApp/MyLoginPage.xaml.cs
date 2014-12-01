@@ -63,8 +63,36 @@ namespace HardingApp
          this.navigationHelper = new NavigationHelper(this);
          this.navigationHelper.LoadState += navigationHelper_LoadState;
          this.navigationHelper.SaveState += navigationHelper_SaveState;
-
+         CheckForEmergencies();
          GetHiddenValues();
+      }
+
+      private async void CheckForEmergencies()
+      {
+          HtmlDocument doc2 = new HtmlDocument();
+          using (var client2 = new HttpClient())
+          {
+
+              var result2 = await client2.GetStringAsync(new Uri(urlString, UriKind.Absolute));
+              doc2.LoadHtml(result2);
+
+              var value = doc2.DocumentNode.Descendants("div")
+                          .Where(x => x.Attributes["class"] != null && x.Attributes["class"].Value == "cms-content")
+                          .Select(x => x.InnerHtml).ToArray();
+
+              if (value[0] != null && value[0] != "")
+              {
+                    Windows.Storage.ApplicationDataContainer roamingSettings =
+                    Windows.Storage.ApplicationData.Current.RoamingSettings;
+                    roamingSettings.Values["emergencytext"] = value[0].ToString();
+              }
+              else
+              {
+                  Windows.Storage.ApplicationDataContainer roamingSettings =
+                      Windows.Storage.ApplicationData.Current.RoamingSettings;
+                  roamingSettings.Values["emergencytext"] = "No Emergencies Found";
+              }
+          }
       }
 
       public async void GetHiddenValues()
@@ -140,7 +168,7 @@ namespace HardingApp
               }
               else
               {
-                  LoginInfoTextBlock.Text = "Invaild Credentials";
+                  LoginInfoTextBlock.Text = "Username or Password is Incorrect.";
                   Debug.WriteLine("Didn't Login!");
               }
 
