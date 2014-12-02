@@ -116,7 +116,7 @@
                     </Grid>
                 </StackPanel>
                 <ListView x:Name="GradesListView" Grid.Row="1"
-                       Grid.Column="0" ItemTemplate="{StaticResource GradesDataTemplate}">
+                       Grid.Column="0" ItemTemplate="{StaticResource GradesDataTemplate}" SelectionMode="None">
                 </ListView>
             </Grid>
         </StackPanel>
