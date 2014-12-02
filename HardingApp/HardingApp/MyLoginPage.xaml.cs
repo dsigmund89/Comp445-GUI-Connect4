@@ -59,12 +59,33 @@ namespace HardingApp
 
       public MyLoginPage()
       {
-         this.InitializeComponent();
-         this.navigationHelper = new NavigationHelper(this);
-         this.navigationHelper.LoadState += navigationHelper_LoadState;
-         this.navigationHelper.SaveState += navigationHelper_SaveState;
+          this.InitializeComponent();
+          this.navigationHelper = new NavigationHelper(this);
+          this.navigationHelper.LoadState += navigationHelper_LoadState;
+          this.navigationHelper.SaveState += navigationHelper_SaveState;
          
           CheckForEmergencies();
+
+          Windows.Storage.ApplicationDataContainer roamingSettings =
+              Windows.Storage.ApplicationData.Current.RoamingSettings;
+          if (roamingSettings.Values.ContainsKey("username") && roamingSettings.Values.ContainsKey("password"))
+          {
+              if (!(String.IsNullOrEmpty(roamingSettings.Values["username"].ToString())) &&
+                  !(String.IsNullOrEmpty(roamingSettings.Values["password"].ToString())))
+              {
+
+                  progressRing.IsActive = true;
+                  progressRing.Visibility = Visibility.Visible;
+                  logInUserIdString = roamingSettings.Values["username"].ToString();
+                  logInPasswordString = roamingSettings.Values["password"].ToString();
+
+                  loginButton.IsEnabled = false;
+
+                  VerifyLogin();
+              }
+          }
+
+          //loginButton.IsEnabled = true;
       }
 
       private async void CheckForEmergencies()
@@ -82,15 +103,17 @@ namespace HardingApp
 
               if (value[0] != null && value[0] != "")
               {
-                    Windows.Storage.ApplicationDataContainer roamingSettings =
-                    Windows.Storage.ApplicationData.Current.RoamingSettings;
-                    roamingSettings.Values["emergencytext"] = value[0].ToString();
+                  Windows.Storage.ApplicationDataContainer roamingSettings =
+                     Windows.Storage.ApplicationData.Current.RoamingSettings;
+                  roamingSettings.Values["emergencytext"] = value[0].ToString();
+                  
+                  Debug.WriteLine(value[0].ToString());
               }
               else
               {
-                  Windows.Storage.ApplicationDataContainer roamingSettings =
-                      Windows.Storage.ApplicationData.Current.RoamingSettings;
-                  roamingSettings.Values["emergencytext"] = "No Emergencies Found";
+                 Windows.Storage.ApplicationDataContainer roamingSettings =
+                     Windows.Storage.ApplicationData.Current.RoamingSettings;
+                 roamingSettings.Values["emergencytext"] = "No Emergencies Found";
               }
           }
       }
@@ -163,10 +186,19 @@ namespace HardingApp
                       Windows.Storage.ApplicationData.Current.RoamingSettings;
                   roamingSettings.Values["welcometext"] = welcomeText;
 
+                  roamingSettings.Values["username"] = logInUserIdString;
+                  roamingSettings.Values["password"] = logInPasswordString;
+
+                  progressRing.IsActive = false;
+                  progressRing.Visibility = Visibility.Collapsed;
+
                   this.Frame.Navigate(typeof(MainPage));
               }
               else
               {
+                  progressRing.IsActive = false;
+                  progressRing.Visibility = Visibility.Collapsed;
+
                   LoginInfoTextBlock.Text = "Username or Password is Incorrect.";
                   Debug.WriteLine("Didn't Login!");
               }
@@ -190,6 +222,9 @@ namespace HardingApp
           {
               logInUserIdString = UsernameTextBox.Text;
               logInPasswordString = PasswordBox.Password;
+
+              progressRing.IsActive = true;
+              progressRing.Visibility = Visibility.Visible;
 
               //GetHiddenValues();
               VerifyLogin();

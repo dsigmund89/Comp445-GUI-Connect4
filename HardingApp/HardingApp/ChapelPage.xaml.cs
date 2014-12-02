@@ -55,6 +55,8 @@ namespace HardingApp
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            //this.NavigationCacheMode = NavigationCacheMode.Enabled;
+
             ChapelWebView.Navigate(new Uri(urlString));
 
             //GetChapelInfo();

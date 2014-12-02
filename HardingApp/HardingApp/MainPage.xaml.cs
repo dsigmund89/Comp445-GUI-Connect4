@@ -132,6 +132,16 @@ namespace HardingApp
                 var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
                 doc.LoadHtml(result);
             }
+
+             Windows.Storage.ApplicationDataContainer roamingSettings =
+              Windows.Storage.ApplicationData.Current.RoamingSettings;
+
+             if (roamingSettings.Values.ContainsKey("username") && roamingSettings.Values.ContainsKey("password"))
+             {
+                 roamingSettings.Values["username"] = "";
+                 roamingSettings.Values["password"] = "";
+             }
+
             this.Frame.Navigate(typeof(MyLoginPage));
         }
 

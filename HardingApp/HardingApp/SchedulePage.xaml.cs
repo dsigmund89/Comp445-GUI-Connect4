@@ -51,6 +51,8 @@ namespace HardingApp
          this.navigationHelper = new NavigationHelper(this);
          this.navigationHelper.LoadState += navigationHelper_LoadState;
          this.navigationHelper.SaveState += navigationHelper_SaveState;
+         this.NavigationCacheMode = NavigationCacheMode.Enabled;
+
          HardingCalendarWebView.Navigate(new Uri(htmlString));
       }
 

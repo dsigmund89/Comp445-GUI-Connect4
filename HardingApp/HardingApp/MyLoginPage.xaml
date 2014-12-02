@@ -41,9 +41,10 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        <TextBox Name="UsernameTextBox" HorizontalAlignment="Center" Margin="517,201,494,395" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="355" PlaceholderText="Username" Text="dsigmund"/>
-        <PasswordBox Name="PasswordBox" HorizontalAlignment="Center" Margin="517,265,494,331" Grid.Row="1" VerticalAlignment="Center" Width="355" PlaceholderText="Password" Password="TROMbone89*^"/>
-        <Button Content="Login" HorizontalAlignment="Center" Margin="588,343,569,204" Grid.Row="1" VerticalAlignment="Center" Height="81" Width="209" FontSize="24" Tapped="Button_Tapped"/>
+        <TextBox Name="UsernameTextBox" HorizontalAlignment="Center" Margin="517,201,494,395" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="355" PlaceholderText="Username"/>
+        <PasswordBox Name="PasswordBox" HorizontalAlignment="Center" Margin="517,265,494,331" Grid.Row="1" VerticalAlignment="Center" Width="355" PlaceholderText="Password"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="588,343,569,204" Grid.Row="1" VerticalAlignment="Center" Height="81" Width="209" FontSize="24" Tapped="Button_Tapped"/>
         <TextBlock Name="LoginInfoTextBlock" HorizontalAlignment="Center" Margin="517,150,616,427" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Height="51" Width="233" FontSize="20" Foreground="#FFEA4747"/>
+        <ProgressRing x:Name="progressRing"  Width="70" Height="70" HorizontalAlignment="Center" Margin="682,485,664,123" Grid.Row="1" VerticalAlignment="Center" Foreground="White"/>
     </Grid>
 </Page>
