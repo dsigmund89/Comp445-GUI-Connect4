@@ -26,7 +26,7 @@ namespace HardingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private string urlString = "https://pipeline.harding.edu/logout.php";
+        private string logoutString = "https://pipeline.harding.edu/logout.php";
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -129,7 +129,7 @@ namespace HardingApp
             HtmlDocument doc = new HtmlDocument();
             using (var client = new HttpClient())
             {
-                var result = await client.GetStringAsync(new Uri(urlString, UriKind.Absolute));
+                var result = await client.GetStringAsync(new Uri(logoutString, UriKind.Absolute));
                 doc.LoadHtml(result);
             }
 
@@ -144,11 +144,5 @@ namespace HardingApp
 
             this.Frame.Navigate(typeof(MyLoginPage));
         }
-
-        private void emergenciesButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }

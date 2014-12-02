@@ -27,6 +27,7 @@ namespace HardingApp
     {
         // Term_in is equal to the year you want and the spring(10) or fall(90) semester. So fall of 2014 is 201490.
         private string urlString = "https://ssbprod1.harding.edu:8443/ssomanager/c/SSB?proc=zwskchpl.P_GetChapel_Info?term_in=201490";
+        private string logoutString = "https://pipeline.harding.edu/logout.php";
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -131,6 +132,27 @@ namespace HardingApp
         private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AboutPage));
+        }
+
+        private async void Logout_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetStringAsync(new Uri(logoutString, UriKind.Absolute));
+                doc.LoadHtml(result);
+            }
+
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+             Windows.Storage.ApplicationData.Current.RoamingSettings;
+
+            if (roamingSettings.Values.ContainsKey("username") && roamingSettings.Values.ContainsKey("password"))
+            {
+                roamingSettings.Values["username"] = "";
+                roamingSettings.Values["password"] = "";
+            }
+
+            this.Frame.Navigate(typeof(MyLoginPage));
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using HardingApp.Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -27,6 +29,7 @@ namespace HardingApp
       private NavigationHelper navigationHelper;
       private ObservableDictionary defaultViewModel = new ObservableDictionary();
       private string htmlString = "http://www.google.com/calendar/embed?src=harding.edu_evioo539doe0lmqi996gs62av4%40group.calendar.google.com&amp;title=Campus Calendar&amp;chrome=NAVIGATION&amp;epr=4&amp;height=588";
+      private string logoutString = "https://pipeline.harding.edu/logout.php";
       /// <summary>
       /// This can be changed to a strongly typed view model.
       /// </summary>
@@ -109,6 +112,27 @@ namespace HardingApp
       private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
       {
           this.Frame.Navigate(typeof(AboutPage));
+      }
+
+      private async void Logout_Tapped(object sender, TappedRoutedEventArgs e)
+      {
+          HtmlDocument doc = new HtmlDocument();
+          using (var client = new HttpClient())
+          {
+              var result = await client.GetStringAsync(new Uri(logoutString, UriKind.Absolute));
+              doc.LoadHtml(result);
+          }
+
+          Windows.Storage.ApplicationDataContainer roamingSettings =
+           Windows.Storage.ApplicationData.Current.RoamingSettings;
+
+          if (roamingSettings.Values.ContainsKey("username") && roamingSettings.Values.ContainsKey("password"))
+          {
+              roamingSettings.Values["username"] = "";
+              roamingSettings.Values["password"] = "";
+          }
+
+          this.Frame.Navigate(typeof(MyLoginPage));
       }
    }
 }

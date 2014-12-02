@@ -37,6 +37,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Label="About" Icon="Help" Tapped="AppBarButton_Tapped" />
+            <AppBarButton Name="Logout" Label="Logout" Icon="Contact" Tapped="Logout_Tapped" />
         </CommandBar>
     </Page.BottomAppBar>
     

@@ -26,6 +26,8 @@ namespace HardingApp
     public sealed partial class EmergenciesPage : Page
     {
         private string urlString = "https://pipeline.harding.edu/";
+        private string logoutString = "https://pipeline.harding.edu/logout.php";
+
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -124,6 +126,27 @@ namespace HardingApp
         private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AboutPage));
+        }
+
+        private async void Logout_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetStringAsync(new Uri(logoutString, UriKind.Absolute));
+                doc.LoadHtml(result);
+            }
+
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+             Windows.Storage.ApplicationData.Current.RoamingSettings;
+
+            if (roamingSettings.Values.ContainsKey("username") && roamingSettings.Values.ContainsKey("password"))
+            {
+                roamingSettings.Values["username"] = "";
+                roamingSettings.Values["password"] = "";
+            }
+
+            this.Frame.Navigate(typeof(MyLoginPage));
         }
     }
 }
