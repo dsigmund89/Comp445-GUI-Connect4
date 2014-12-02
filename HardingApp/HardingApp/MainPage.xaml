@@ -38,10 +38,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
-                 </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40">
+            	<Run Text="Harding App"/>
+            	<LineBreak/>
+            	<Run/>
+            </TextBlock>
         </Grid>
         <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left"  Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="1289" FontSize="20" Margin="121,82,-44,0"/>
 
@@ -62,6 +66,6 @@
             <Button x:Name="gradesButton" Content="Grades" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="124" Width="185" Tapped="gradesButton_Tapped" FontSize="24" Margin="20,20,20,20"/>
             <Button x:Name="currentEventsButton" Content="Current Events" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Height="124" Width="185" Tapped="currentEventsButton_Tapped" FontSize="22" Margin="20,20,20,20"/>
             <Button x:Name="classesButton" Content="Classes" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="124" Width="185" Tapped="classesButton_Tapped" FontSize="24" Margin="20,20,20,20"/>
-            </Grid>
         </Grid>
+    </Grid>
 </Page>
