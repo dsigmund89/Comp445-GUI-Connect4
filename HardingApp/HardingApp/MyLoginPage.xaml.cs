@@ -63,8 +63,8 @@ namespace HardingApp
          this.navigationHelper = new NavigationHelper(this);
          this.navigationHelper.LoadState += navigationHelper_LoadState;
          this.navigationHelper.SaveState += navigationHelper_SaveState;
-         CheckForEmergencies();
-         GetHiddenValues();
+         
+          CheckForEmergencies();
       }
 
       private async void CheckForEmergencies()
@@ -95,8 +95,9 @@ namespace HardingApp
           }
       }
 
-      public async void GetHiddenValues()
+      private async void VerifyLogin()
       {
+          // Get the hidden values
           HtmlDocument doc = new HtmlDocument();
           using (var client = new HttpClient())
           {
@@ -131,20 +132,18 @@ namespace HardingApp
               Debug.WriteLine("ltValue = " + ltValue);
               Debug.WriteLine("executionValue = " + executionValue);
           }
-      }
 
-      private async void VerifyLogin()
-      {
+          // Now try and login
           loginParams = "&username=" + logInUserIdString + "&password=" + logInPasswordString
                           + "&lt=" + ltValue + "&execution=" + executionValue + "&_eventId=submit&submit=Log+in";
           string teamResponse = urlString + loginParams;
           Debug.WriteLine(teamResponse);
 
-          HttpClient client = new HttpClient();
+          HttpClient client2 = new HttpClient();
 
           try
           {
-              HttpResponseMessage response = await client.PostAsync(new Uri(teamResponse), null);
+              HttpResponseMessage response = await client2.PostAsync(new Uri(teamResponse), null);
 
               response.EnsureSuccessStatusCode();
               string responseBody = await response.Content.ReadAsStringAsync();
@@ -183,11 +182,16 @@ namespace HardingApp
 
       private void Button_Tapped(object sender, TappedRoutedEventArgs e)
       {
+          if (UsernameTextBox.Text.Trim() == "")
+              LoginInfoTextBlock.Text = "Please enter your username.";
+          else if (PasswordBox.Password.Trim() == "")
+              LoginInfoTextBlock.Text = "Please enter your password.";
           if (UsernameTextBox.Text.Trim() != "" && PasswordBox.Password.Trim() != "")
           {
               logInUserIdString = UsernameTextBox.Text;
               logInPasswordString = PasswordBox.Password;
 
+              //GetHiddenValues();
               VerifyLogin();
           }
       }
