@@ -145,5 +145,10 @@ namespace HardingApp
             this.Frame.Navigate(typeof(MyLoginPage));
         }
 
+        private void emergenciesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

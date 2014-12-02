@@ -29,6 +29,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
@@ -36,20 +38,30 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                 </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        <Button x:Name="chapelButton" Content="Chapel" HorizontalAlignment="Left" Margin="253,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="175" Tapped="chapelButton_Tapped" FontSize="24"/>
-        <Button x:Name="mapButton" Content="Map" HorizontalAlignment="Left" Margin="479,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="166" Tapped="mapButton_Tapped" FontSize="24"/>
-        <Button x:Name="emergenciesButton" Content="Emergencies" HorizontalAlignment="Left" Margin="699,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="166" Tapped="emergenciesButton_Tapped" FontSize="22"/>
-        <Button x:Name="classesButton" Content="Classes" HorizontalAlignment="Left" Margin="928,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="166" Tapped="classesButton_Tapped" FontSize="24"/>
-        <Button x:Name="gradesButton" Content="Grades" HorizontalAlignment="Left" Margin="253,356,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="166" Tapped="gradesButton_Tapped" FontSize="24"/>
-        <Button x:Name="currentEventsButton" Content="Current Events" HorizontalAlignment="Left" Margin="479,356,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="185" Tapped="currentEventsButton_Tapped" FontSize="22"/>
-        <Button x:Name="classifiedButton" Content="Classified" HorizontalAlignment="Left" Margin="699,356,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="166" Tapped="classifiedButton_Tapped" FontSize="24"/>
-        <Button x:Name="cafeteriaButton" Content="Cafeteria" HorizontalAlignment="Left" Margin="928,356,0,0" Grid.Row="1" VerticalAlignment="Top" Height="124" Width="182" Tapped="cafeteriaButton_Tapped" FontSize="24"/>
-        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" Margin="67,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="1289" FontSize="20"/>
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left"  Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" Width="1289" FontSize="20"/>
 
-    </Grid>
+        <Grid Grid.Row="1"  Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="chapelButton" Content="Chapel" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="124" Width="185" Tapped="chapelButton_Tapped" FontSize="24" Margin="20,20,20,20"/>
+            <Button x:Name="mapButton" Content="Map" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Height="124" Width="185" Tapped="mapButton_Tapped" FontSize="24" Margin="20,20,20,20"/>
+            <Button x:Name="emergenciesButton" Content="Emergencies" HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" Height="124" Width="185" Tapped="emergenciesButton_Tapped" FontSize="22" Margin="20,20,20,20"/>
+            <Button x:Name="gradesButton" Content="Grades" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="124" Width="185" Tapped="gradesButton_Tapped" FontSize="24" Margin="20,20,20,20"/>
+            <Button x:Name="currentEventsButton" Content="Current Events" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Height="124" Width="185" Tapped="currentEventsButton_Tapped" FontSize="22" Margin="20,20,20,20"/>
+            <Button x:Name="classesButton" Content="Classes" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="124" Width="185" Tapped="classesButton_Tapped" FontSize="24" Margin="20,20,20,20"/>
+            </Grid>
+        </Grid>
 </Page>
